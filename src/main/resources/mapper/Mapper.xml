@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.lemphis.springbatchdemo.batch.mybatis.Mapper">
+
+	<insert id="test" parameterType="me.lemphis.springbatchdemo.entity.DummyItem">
+		insert into dummy_item(first_name, email, created_at)
+		values (#{firstName}, #{email}, #{createdAt})
+	</insert>
+
+	<select id="selectTwoColumns" resultType="map">
+		select first_name, email
+		from dummy_item
+		limit 10
+	</select>
+
+</mapper>

@@ -1,6 +1,6 @@
 package me.lemphis.springbatchdemo.batch
 
-data class DummyCsvItem(
+data class DummyItemDto(
     val firstName: String,
     val lastName: String,
     val email: String,

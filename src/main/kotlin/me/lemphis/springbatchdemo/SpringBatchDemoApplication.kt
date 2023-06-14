@@ -9,5 +9,5 @@ import org.springframework.boot.runApplication
 class SpringBatchDemoApplication
 
 fun main(args: Array<String>) {
-    runApplication<SpringBatchDemoApplication>(*args)
+	runApplication<SpringBatchDemoApplication>(*args)
 }
