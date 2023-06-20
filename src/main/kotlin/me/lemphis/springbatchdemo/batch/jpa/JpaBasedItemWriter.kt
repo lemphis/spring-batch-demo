@@ -11,7 +11,7 @@ class JpaBasedItemWriter(
 ) {
 
 	@Bean
-	fun jpaItemWriter() = JpaItemWriterBuilder<DummyItem>()
+	fun jpaItemWriter() = JpaItemWriterBuilder<Dest>()
 		.entityManagerFactory(entityManagerFactory)
 		.build()
 

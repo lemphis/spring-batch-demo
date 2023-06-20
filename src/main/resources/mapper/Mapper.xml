@@ -2,15 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="me.lemphis.springbatchdemo.batch.mybatis.Mapper">
 
-	<insert id="test" parameterType="me.lemphis.springbatchdemo.entity.DummyItem">
-		insert into dummy_item(first_name, email, created_at)
-		values (#{firstName}, #{email}, #{createdAt})
-	</insert>
-
-	<select id="selectTwoColumns" resultType="map">
-		select first_name, email
-		from dummy_item
-		limit 10
+	<select id="selectFromSrc" resultType="me.lemphis.springbatchdemo.batch.jpa.Src">
+		SELECT first_name AS firstName, last_name as lastName, email
+		FROM src
+		<if test="_skiprows != null and _pagesize != null">
+			LIMIT #{_skiprows}, #{_pagesize}
+		</if>
 	</select>
+
+	<insert id="insertIntoDest" parameterType="me.lemphis.springbatchdemo.batch.DummyItemDto">
+		INSERT INTO dest(full_name, email)
+		values (#{fullName}, #{email})
+	</insert>
 
 </mapper>

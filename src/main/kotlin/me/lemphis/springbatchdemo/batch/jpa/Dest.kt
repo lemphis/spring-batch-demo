@@ -5,23 +5,18 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import java.time.LocalDateTime
 
 @Entity
-class DummyItem(
-	@Column(length = 20)
-	var firstName: String? = null,
-	@Column(length = 20)
-	var lastName: String? = null,
-	@Column(length = 200)
-	var email: String? = null,
+class Dest(
+	@Column(length = 40, nullable = false)
+	var fullName: String,
+	@Column(length = 200, nullable = false)
+	var email: String,
 ) {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	var id: Long? = null
-
-	var createdAt: LocalDateTime = LocalDateTime.now()
 
 }
 

@@ -1,6 +1,6 @@
 package me.lemphis.springbatchdemo.batch.mybatis
 
-import me.lemphis.springbatchdemo.batch.DummyItemDto
+import me.lemphis.springbatchdemo.batch.jpa.Dest
 import org.apache.ibatis.session.SqlSessionFactory
 import org.mybatis.spring.batch.builder.MyBatisBatchItemWriterBuilder
 import org.springframework.context.annotation.Bean
@@ -12,9 +12,9 @@ class MyBatisBasedItemWriter(
 ) {
 
 	@Bean
-	fun mybatisBatchItemWriter() = MyBatisBatchItemWriterBuilder<DummyItemDto>()
+	fun mybatisBatchItemWriter() = MyBatisBatchItemWriterBuilder<Dest>()
 		.sqlSessionFactory(sqlSessionFactory)
-		.statementId("Mapper.id")
+		.statementId("me.lemphis.springbatchdemo.batch.mybatis.Mapper.insertIntoDest")
 		.build()!!
 
 }

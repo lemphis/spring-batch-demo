@@ -1,6 +1,8 @@
 package me.lemphis.springbatchdemo.batch.jdbc
 
-import me.lemphis.springbatchdemo.batch.DummyItemDto
+import me.lemphis.springbatchdemo.batch.jpa.Src
+import org.springframework.batch.item.database.Order
+import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuilder
 import org.springframework.batch.item.database.builder.JdbcPagingItemReaderBuilder
 import org.springframework.batch.item.database.support.MySqlPagingQueryProvider
 import org.springframework.context.annotation.Bean
@@ -13,16 +15,26 @@ class JdbcBasedItemReader(
 ) {
 
 	@Bean
-	fun jdbcPagingItemReader() = JdbcPagingItemReaderBuilder<DummyItemDto>()
+	fun jdbcPagingItemReader() = JdbcPagingItemReaderBuilder<Src>()
+		.name("jdbcPagingItemReader")
 		.dataSource(dataSource)
 		.queryProvider(
 			MySqlPagingQueryProvider().apply {
-				setSelectClause("SELECT *")
-				setFromClause("FROM dummy_item")
+				setSelectClause("SELECT first_name, last_name, email")
+				setFromClause("FROM src")
+				sortKeys = mapOf("id" to Order.ASCENDING)
 			},
 		)
-		.pageSize(1000)
-		.beanRowMapper(DummyItemDto::class.java)
+		.pageSize(1_000)
+		.beanRowMapper(Src::class.java)
+		.build()
+
+	@Bean
+	fun jdbcCursorItemReader() = JdbcCursorItemReaderBuilder<Src>()
+		.name("jdbcCursorItemReader")
+		.dataSource(dataSource)
+		.sql("SELECT first_name, last_name, email FROM src")
+		.beanRowMapper(Src::class.java)
 		.build()
 
 }

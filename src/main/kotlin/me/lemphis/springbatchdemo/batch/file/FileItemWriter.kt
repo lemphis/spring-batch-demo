@@ -1,23 +1,23 @@
 package me.lemphis.springbatchdemo.batch.file
 
 import me.lemphis.springbatchdemo.batch.DummyItemDto
-import org.springframework.batch.core.configuration.annotation.StepScope
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder
 import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor
 import org.springframework.batch.item.file.transform.DelimitedLineAggregator
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.FileSystemResource
+import java.nio.charset.StandardCharsets
 
 @Configuration
 class FileItemWriter {
 
 	@Bean
-	@StepScope
-	fun fileItemWriter() = FlatFileItemWriterBuilder<DummyItemDto>()
-		.name("flatFileItemWriter")
-		.encoding("UTF-8")
-		.resource(FileSystemResource("."))
+	fun csvFileItemWriter() = FlatFileItemWriterBuilder<DummyItemDto>()
+		.name("csvFileItemWriter")
+		.encoding(StandardCharsets.UTF_8.name())
+		.resource(FileSystemResource("output.csv"))
+		.headerCallback { it.write("first_name,last_name,email") }
 		.lineAggregator(delimitedLineAggregator())
 		.build()
 
@@ -27,7 +27,7 @@ class FileItemWriter {
 	}
 
 	private fun beanWrapperFieldExtractor() = BeanWrapperFieldExtractor<DummyItemDto>().apply {
-		setNames(arrayOf("first_name", "last_name", "email"))
+		setNames(arrayOf("firstName", "lastName", "email"))
 	}
 
 }

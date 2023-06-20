@@ -1,7 +1,8 @@
 package me.lemphis.springbatchdemo.batch.mybatis
 
-import me.lemphis.springbatchdemo.batch.DummyItemDto
+import me.lemphis.springbatchdemo.batch.jpa.Src
 import org.apache.ibatis.session.SqlSessionFactory
+import org.mybatis.spring.batch.builder.MyBatisCursorItemReaderBuilder
 import org.mybatis.spring.batch.builder.MyBatisPagingItemReaderBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,10 +13,16 @@ class MyBatisBasedItemReader(
 ) {
 
 	@Bean
-	fun mybatisPagingItemReader() = MyBatisPagingItemReaderBuilder<DummyItemDto>()
+	fun mybatisPagingItemReader() = MyBatisPagingItemReaderBuilder<Src>()
 		.sqlSessionFactory(sqlSessionFactory)
-		.queryId("Mapper.id")
+		.queryId("me.lemphis.springbatchdemo.batch.mybatis.Mapper.selectFromSrc")
 		.pageSize(1000)
+		.build()!!
+
+	@Bean
+	fun mybatisCursorItemReader() = MyBatisCursorItemReaderBuilder<Src>()
+		.sqlSessionFactory(sqlSessionFactory)
+		.queryId("me.lemphis.springbatchdemo.batch.mybatis.Mapper.selectFromSrc")
 		.build()!!
 
 }

@@ -7,21 +7,20 @@ spring:
     hikari:
       connection-timeout: 3000
       auto-commit: false
-    ansi:
-      enabled: always
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     open-in-view: false
     show-sql: false
     hibernate:
-      ddl-auto: create-drop
-    property-naming-strategy: SNAKE_CASE
+      ddl-auto: update
   h2:
     console:
       enabled: true
   batch:
-    jdbc:
-      initialize-schema: ALWAYS
+    job:
+      name: ${job.name:NONE}
   sql:
     init:
       mode: always
+  jackson:
+    property-naming-strategy: SNAKE_CASE
