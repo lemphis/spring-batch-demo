@@ -12,7 +12,7 @@ group = "me.lemphis"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-val kotestVersion = "4.4.3"
+val mybatisStarterVersion = "3.0.1"
 
 repositories {
 	mavenCentral()
@@ -32,13 +32,10 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("mysql:mysql-connector-java")
-	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1")
+	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:$mybatisStarterVersion")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.batch:spring-batch-test")
-	testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
-	testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
-	testImplementation("io.kotest:kotest-property:$kotestVersion")
-	testImplementation("io.kotest:kotest-extensions-spring:$kotestVersion")
+	testImplementation("com.h2database:h2")
 }
 
 tasks.withType<KotlinCompile> {
