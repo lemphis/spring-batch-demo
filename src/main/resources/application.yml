@@ -13,14 +13,8 @@ spring:
     show-sql: false
     hibernate:
       ddl-auto: update
-  h2:
-    console:
-      enabled: true
   batch:
     job:
       name: ${job.name:NONE}
-  sql:
-    init:
-      mode: always
   jackson:
     property-naming-strategy: SNAKE_CASE

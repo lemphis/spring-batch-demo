@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test;MODE=MySQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    hikari:
+      connection-timeout: 3000
+      auto-commit: false
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  h2:
+    console:
+      enabled: true
+  batch:
+    job:
+      enabled: false
