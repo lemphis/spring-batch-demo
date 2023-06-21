@@ -9,15 +9,10 @@ import org.springframework.context.annotation.Configuration
 import javax.sql.DataSource
 
 @Configuration
-class MyBatisConfig(
-	private val applicationContext: ApplicationContext,
-) {
+class MyBatisConfig{
 
 	@Bean
-	fun sqlSessionFactory(dataSource: DataSource) = SqlSessionFactoryBean().apply {
-		setDataSource(dataSource)
-		setMapperLocations(*applicationContext.getResources("classpath:/mapper/**/*Mapper.xml"))
-	}
+	fun sqlSessionFactory(dataSource: DataSource) = SqlSessionFactoryBean().apply { setDataSource(dataSource) }
 
 	@Bean
 	fun sqlSession(sqlSessionFactory: SqlSessionFactory) = SqlSessionTemplate(sqlSessionFactory)

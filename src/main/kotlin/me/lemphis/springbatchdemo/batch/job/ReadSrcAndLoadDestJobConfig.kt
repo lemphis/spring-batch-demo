@@ -38,7 +38,7 @@ class ReadSrcAndLoadDestJobConfig(
 
 	private fun readSrcAndLoadDestStep() = StepBuilder(STEP_NAME, jobRepository)
 		.chunk<Src, Dest>(CHUNK_SIZE, transactionManager)
-		.reader(jpaPagingItemReader)
+		.reader(mybatisCursorItemReader)
 		.processor { it.toDest() }
 		.writer(mybatisBatchItemWriter)
 		.build()
